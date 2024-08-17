@@ -42,10 +42,28 @@ const updateEmployee = (req, res) => {
   res.json(data.employees);
 };
 const deleteEmployee = (req, res) => {
-  res.json({ id: req.body.id });
+  const employee = data.employees.find(
+    (emp) => emp.id === parseInt(req.body.id)
+  );
+  if (!employee) {
+    return res
+      .status(400)
+      .json({ message: `employee id ${req.body.id} not found` });
+  }
+  const filter = data.employees.filter(
+    (emp) => emp.id !== parseInt(req.body.id)
+  );
+  data.setEmployees([...filter]);
+  res.json(data.employees);
 };
 const getEmployee = (req, res) => {
-  res.json({ id: req.params.id });
+  const employee = data.employees.find(
+    (emp) => emp.id === parseInt(req.params.id)
+  );
+  if (!employee) {
+    return res.json({ message: `employee id ${req.params.id} not found` });
+  }
+  res.json(employee);
 };
 module.exports = {
   getAllEmployees,

@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const employeeController = require("../../controllers/employeesControler");
 //End
-let data = {};
-data.employees = require("../../data/employees.json");
 
 router
   .route("/")
