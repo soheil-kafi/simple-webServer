@@ -1,4 +1,5 @@
 this is simple web server with node.js and express
+also have Json web tokens , protected api and routes and roles
 and not have a data base , i simulate that with a data/employee.json so you can use api
 to use , first run "npm i" to add dependencies
 then run "npm run dev"

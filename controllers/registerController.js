@@ -16,13 +16,17 @@ const handleNewUser = async (req, res) => {
   }
   const duplicate = userDB.users.find((person) => person.userName === user);
   if (duplicate) {
-    return res.sendStatus(409).json({ message: "userName are already used" }); //Conflict
+    return res.sendStatus(409); //Conflict
   }
   try {
     //hash the psw
     const hashedPwd = await bcrypt.hash(pwd, 9);
     //stor
-    const newUser = { userName: user, password: hashedPwd };
+    const newUser = {
+      userName: user,
+      password: hashedPwd,
+      roles: { User: 1400 },
+    };
     userDB.setUser([...userDB.users, newUser]);
     await fsPromises.writeFile(
       path.join(__dirname, "..", "data", "users.json"),
